@@ -6,16 +6,16 @@ player = {1:"Red", 0:"Yellow"}
 
 root = Tk()
 
-winning_label = Label(root, text=f'The winner is {player[turn]}')
+winning_label = Label(root, text=f'The winner is {"Red" if turn else "Yellow"}')
+
+
 def connect_token(board, position):
     count = 0
     temp_position = position
     while board[temp_position[0] + 1][temp_position[1]] == board[temp_position[0]][temp_position[1]]:
         temp_position[0] += 1
         count += 1
-        #print(count)
         if count == 4:
-            print("done")
             return True
     temp_position = position
     count -= 1
@@ -90,6 +90,7 @@ def add_token(position):
 
     print_board(board)
     if connect_token(board, check_pos):
+        winning_label = Label(root, text=f'The winner is {"Red" if turn else "Yellow"}')
         winning_label.grid(row=7, column =2)
     turn = not turn
 
